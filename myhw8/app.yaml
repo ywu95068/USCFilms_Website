@@ -1,0 +1,8 @@
+runtime: nodejs14
+handlers:
+  - url: /(.*\.(js|css|svg|png)(|\.map))$
+    static_files: dist/myhw8/\1
+    upload: dist/myhw8/(.*)(|\.map)
+  - url: /.*
+    static_files: dist/myhw8/index.html
+    upload: dist/myhw8/.*

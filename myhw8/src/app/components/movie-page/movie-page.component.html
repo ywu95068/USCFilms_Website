@@ -1,0 +1,159 @@
+<div class="container" id="firstcontainer" *ngIf="detail_info">
+  <div class="row">
+<youtube-player *ngIf="screenwidth>=768" class="col-md-8"
+  [videoId]="this.video_info.videoId"
+  suggestedQuality="highres"
+  [height]="this.videoH"
+  [width]="this.videoL">
+</youtube-player>
+    <youtube-player *ngIf="screenwidth<768" class="col-md-8"
+  [videoId]="this.video_info.videoId"
+  suggestedQuality="highres"
+  [height]="this.videoHforphone"
+  [width]="this.videoLforphone">
+</youtube-player>
+<div class="basicInfo col-md-4">
+  <h1>{{this.detail_info.title}}</h1>
+  <i>{{this.detail_info.tagline}}</i>
+  <p></p>
+  <p>
+    <span>{{this.detail_info.release_date}}</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    <span>&#9733;</span><span>{{this.detail_info.vote_average}}</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    <span>{{this.detail_info.runtime }}</span>
+  </p>
+  <p class="geAndlang">
+    <span class="titleOfgeAndlang">Genres&nbsp;:&nbsp;</span>
+    <span>{{this.detail_info.genres}}</span>
+    <br>
+    <span class="titleOfgeAndlang" >Spoken Language&nbsp;:&nbsp;</span>
+    <span>{{this.detail_info.spoken_language}}</span>
+  </p>
+  <button type="button" *ngIf="!inWatchlist" class="btn btn-primary btn-sm" (click)="addWatchlist(detail_info.id, this.detail_info.title, this.detail_info.poster_path)">Add to Watchlist</button>
+  <button type="button" *ngIf="inWatchlist" class="btn btn-primary btn-sm" (click)="removeWatchlist(detail_info.id)">Remove from Watchlist</button>
+  <div class="alert alert-danger" id="removeAlert" role="alert" *ngIf="removed">
+    Remove from watchlist
+    <button class="closeSymbol" (click)="closeRemove()">&#10005;</button>
+  </div>
+  <div class="alert alert-success" id="addAlert" role="alert" *ngIf="added">
+    Add to watchlist.
+    <button class="closeSymbol" (click)="closeAdd()">&#10005;</button>
+  </div>
+</div>
+  </div>
+  <div class="row discription">
+    <p class="titleOfdescription col-md-12 col-lg-12">Description</p><br>
+    <p class="col-md-12 col-lg-12">{{this.detail_info.overview}}</p><br>
+    <p class="titleOfdescription col-md-12 col-lg-w12">Share</p><br>
+    <div class="col-md-12 socialMedias"  >
+    <a class="fa fa-twitter" *ngIf="this.twitterUrl"
+       [href]="'https://twitter.com/intent/tweet?text='+this.twitterText+this.twitterUrl+'&hashtags=USC,CSCI571,FightOn'"></a>
+    <a *ngIf="this.twitterUrl" class="fa fa-facebook" [href]="'https://www.facebook.com/sharer/sharer.php?u='+this.twitterUrl" ></a>
+    </div>
+  </div>
+  </div>
+  <div class="container" id="castContainer" *ngIf="this.castlist">
+  <div class="row" *ngIf="castlist.length>0">
+  <h3 id="fullcast">Full Cast and Crew</h3>
+  </div>
+  <div class="table-responsive" id="containcast">
+    <table id="tb_departments" class="table text-nowrap">
+    <div class="castlist" *ngIf="this.castlist">
+      <ng-container *ngIf="castlist.length>6">
+    <ng-container *ngFor="let cast of this.castlist">
+    <div class="card col-md-2" *ngIf="this.cast.profile_path" (click)="show_castinfo(this.cast.id)"  data-toggle="modal" data-target="#exampleModal">
+      <img class="card-img-top" [src]="this.castpicurl+this.cast.profile_path"  alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text">
+          <span class="castName">{{this.cast.name}}</span><br>
+          <span class="castAs">AS</span><br>
+          <span class="characterName">{{this.cast.character}}</span>
+        </p>
+      </div>
+    </div>
+ </ng-container></ng-container>
+      <ng-container *ngIf="castlist.length<=6">
+        <div class="row">
+    <ng-container *ngFor="let cast of this.castlist">
+    <div class="card col-md-2" *ngIf="this.cast.profile_path" (click)="show_castinfo(this.cast.id)"  data-toggle="modal" data-target="#exampleModal">
+      <img class="card-img-top" [src]="this.castpicurl+this.cast.profile_path"  alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text">
+          <span class="castName">{{this.cast.name}}</span><br>
+          <span class="castAs">AS</span><br>
+          <span class="characterName">{{this.cast.character}}</span>
+        </p>
+      </div>
+    </div>
+ </ng-container></div></ng-container>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="this.castInfo">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{this.castInfo.name}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="detailinfoOfcast">
+              <img [src]="this.castpicurl+this.castInfo.profile_path" class="picOfcast">
+              <div class="castbias">
+                <p>
+                  <ng-container *ngIf="this.castInfo.birthday"><span>Birth:</span><span>{{this.castInfo.birthday}}</span><br></ng-container>
+                  <ng-container *ngIf="this.castInfo.place_of_birth"><span>Birth Place:</span><span>{{this.castInfo.place_of_birth}}</span><br></ng-container>
+                  <ng-container *ngIf="this.castInfo.gender"><span>Gender:</span><span *ngIf="this.castInfo.gender ==2"> Male </span><span *ngIf="this.castInfo.gender ==1"> Female </span><br></ng-container>
+                  <ng-container *ngIf="this.castInfo.homepage"><span>Website:</span><a [href]="this.castInfo.homepage">{{this.castInfo.homepage}}</a><br></ng-container>
+                  <ng-container *ngIf="this.castInfo.known_for_department"><span>Know for:</span><span>{{this.castInfo.known_for_department}}</span><br></ng-container>
+                  <ng-container *ngIf="this.castInfo.also_known_as.length>0"><span>Also Known as:</span><span *ngFor="let n of this.castInfo.also_known_as">{{n}},</span></ng-container></p>
+                <span>
+                  <a *ngIf="this.socialmedia.imdb" class="fa fa-imdb" ngbPopover="Visit IMDB" [href]="'https://www.imdb.com/name/'+this.socialmedia.imdb"></a>
+
+                  <a *ngIf="this.socialmedia.ins" class="fa fa-instagram" ngbPopover="Visit Instagram" [href]="'https://www.instagram.com/'+this.socialmedia.ins"></a>
+                  <a *ngIf="this.socialmedia.fb" class="fa fa-facebook castfb" ngbPopover="Visit Facebook" [href]="'https://www.facebook.com/'+this.socialmedia.fb"></a>
+                  <a *ngIf="this.socialmedia.tw" class="fa fa-twitter casttw" ngbPopover="Visit Twitter" [href]="'https://www.twitter.com/'+this.socialmedia.tw"></a>
+                </span>
+              </div>
+              <div class="biography" *ngIf="this.castInfo.biography">
+                <h4>Biography</h4>
+                <p class="castbio">{{this.castInfo.biography}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+    </table>
+  </div>
+  </div>
+
+  <div class="container" *ngIf="reviews">
+    <div class="row" *ngIf="reviews.length>0">
+        <h3>Reviews&nbsp;&nbsp;&nbsp;<span  class="reviewnum">{{this.reviews.length}} </span></h3>
+    </div>
+      <div class="reviews" *ngIf="reviews">
+        <div class="review" *ngFor="let review of reviews">
+          <img class="picOfreviw" *ngIf="review.avatar_path" [src]="'https://image.tmdb.org/t/p/original'+review.avatar_path">
+          <img class="picOfreviw" *ngIf="!review.avatar_path" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnPmUvFLjjmoYWAbLTEmLLIRCPpV_OgxCVA&usqp=CAU">
+          <div class="reviewinfo">
+            <h4>A review created By {{review.author}}.
+              <span *ngIf="screenwidth>=768">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <br *ngIf="screenwidth<768"><br *ngIf="screenwidth<768">
+              <span class="ratingOfReview">&nbsp;&nbsp;<span class="ratingstar">&#9733;</span>&nbsp;&nbsp;{{review.rating}}&nbsp;&nbsp;&nbsp;</span>
+            </h4>
+            <p class="reviewCreated"><br>Writen by {{review.author}} on {{review.created_at}}</p>
+            <p class="reviewContent">{{review.content}}</p>
+            <a style="text-decoration:underline" target="_blank" [href]="review.url">Read the rest</a>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+  <div id="recommended" class="container rands" *ngIf="recommend_m">
+     <h1 class="subtitiles">Recommended Movies</h1>
+      <app-movie-carouel [popm]="this.recommend_m" sId="recommend_movie" media_type="movie"></app-movie-carouel>
+    </div>
+  <div id="Similar" class="container rands" *ngIf="similar_m">
+     <h1 class="subtitiles">Similar Movies</h1>
+      <app-movie-carouel [popm]="this.similar_m" sId="similar_movie" media_type="movie"></app-movie-carouel>
+    </div>

@@ -1,0 +1,96 @@
+h2{
+  color: white;
+}
+.myWatchlist{
+margin-top: 40px;
+}
+.nofound{
+  text-align: center;
+  margin-top: 40px;
+}
+.postersOfwatchlist{
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.watchlistPosterTitle{
+  position: absolute;
+  width: 100%;
+  height: 45%;
+  background-image: linear-gradient(transparent,black,black );
+  z-index: 2;
+  bottom: 0;
+  visibility: hidden;
+  margin-top: 40px;
+}
+.watchlistPosterTitle2{
+  position: absolute;
+  width: 100%;
+  height: 45%;
+  background-image: linear-gradient(transparent,black,black );
+  z-index: 2;
+  bottom: 0;
+  visibility: visible;
+  margin-top: 40px;
+}
+.windowforphone{
+  position: relative;
+}
+.positionHelper{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.txtOfposter{
+  position: absolute;
+  bottom: 0;
+  color: white;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: lighter;
+}
+.widowForPoseter:hover .watchlistPosterTitle{
+  visibility: visible;
+}
+.widowForPoseter:hover{
+  transform: scale(1.1);
+}
+.watchlist{
+  margin-top: 60px;
+}
+.containOfwatchlist{
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.watchlistRow{
+  margin-top: 40px;
+}
+.phoneversion{
+  padding: 20px;
+}
+@media screen and(min-width: 768px){
+  .watchlistPosterTitle{
+  visibility: hidden;
+
+}
+}
+@media screen and(max-width: 767px){
+.watchlistPosterTitle{
+  visibility: visible;
+  background-color: #00B7FF;
+
+}
+  .positionHelper{
+    visibility: visible;
+  }
+  .txtOfposter{
+    visibility: visible;
+  }
+  .widowForPoseter:hover .watchlistPosterTitle{
+  visibility: visible;
+}
+.widowForPoseter:hover{
+  transform: scale(1.1);
+}
+}
+

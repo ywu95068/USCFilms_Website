@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  background-color: #020129;
+  height: 100%;
+}
+a:hover{
+  text-decoration:none;
+}
+*:focus{
+  outline: none;
+}
+.dropdown-menu{
+    background-color: #020129!important;
+  padding: 0;
+}

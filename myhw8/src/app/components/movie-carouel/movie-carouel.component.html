@@ -1,0 +1,77 @@
+<div [id]="sId"  class="carousel slide phoneCarousel">
+  <ng-container *ngIf="screenwidth>=768">
+    <ol class="carousel-indicators line-indicator">
+      <ng-container *ngFor="let item of popm.results;let i=index">
+        <li [attr.data-target]="'#'+sId" data-slide-to="0" class="active" *ngIf="i==0"></li>
+        <li [attr.data-target]="'#'+sId" [attr.data-slide-to]="i" *ngIf="i>0"></li>
+      </ng-container>
+    </ol>
+    <div class="carousel-inner">
+      <ng-container *ngFor="let item of popm.results;let i=index">
+        <div class="carousel-item active" *ngIf="i==0">
+          <div class="row posterRow">
+            <ng-container *ngFor="let it of item">
+              <div class="col-md-2 eachposter" [routerLink]="'/watch/'+media_type+'/'+it.id" (click)="addCountinue(it.id, it.poster_path, it.title)">
+                <img  [src]="'https://image.tmdb.org/t/p/w500'+it.poster_path" class="img-thumbnail posterImg" >
+                <div class="carousel-caption d-none d-md-block subPoster">
+                  <h5 class="posterTitles">{{it.title}}</h5>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="carousel-item" *ngIf="i>0">
+          <div class="row">
+            <ng-container *ngFor="let it of item" >
+              <div class="col-md-2 eachposter" [routerLink]="'/watch/'+media_type+'/'+it.id"  (click)="addCountinue(it.id, it.poster_path, it.title)">
+                <img [src]="'https://image.tmdb.org/t/p/w500'+it.poster_path" class="img-thumbnail posterImg" >
+                <div class="carousel-caption d-none d-md-block subPoster">
+                  <h5 class="posterTitles">{{it.title}}</h5>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="screenwidth<768" >
+     <ol class="carousel-indicators line-indicator phoneIndicator ">
+        <ng-container *ngFor="let item of popm.resultsforphone;let i=index">
+          <li [attr.data-target]="'#'+sId" data-slide-to="0" class="active" *ngIf="i==0"></li>
+          <li [attr.data-target]="'#'+sId" [attr.data-slide-to]="i" *ngIf="i>0"></li>
+        </ng-container>
+     </ol>
+    <div class="carousel-inner phoneInner">
+      <ng-container *ngFor="let item of popm.resultsforphone;let i=index">
+        <div class="carousel-item active" *ngIf="i==0">
+          <div class="row eachposter" [routerLink]="'/watch/'+media_type+'/'+item.id"  (click)="addCountinue(item.id, item.poster_path, item.title)">
+            <img [src]="'https://image.tmdb.org/t/p/w500'+item.poster_path" class="img-thumbnail col-sm-12 posterImg" >
+              <div class="carousel-caption d-block d-md-none subPoster ">
+                 <h5  class="posterTitles">{{item.title}}</h5>
+              </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" *ngIf="i>0">
+          <div class="row eachposter" [routerLink]="'/watch/'+media_type+'/'+item.id" (click)="addCountinue(item.id, item.poster_path, item.title)">
+            <img [src]="'https://image.tmdb.org/t/p/w500'+item.poster_path" class="img-thumbnail col-sm-12 posterImg">
+            <div class="carousel-caption d-block d-md-none subPoster ">
+                  <h5  class="posterTitles">{{item.title}}</h5>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <a class="carousel-control-prev line-carousel-l" [href]="'#'+sId" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next line-carousel-r" [href]="'#'+sId" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

@@ -1,0 +1,43 @@
+<div id="outDiv">
+<div>
+<nav class="navbar navbar-expand-sm  navbar-dark">
+
+    <span class="nav-item">
+      <a class="nav-link" href="#" id="uscfilms" >USC Films</a>
+    </span>
+  <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link homeAlist" href="#" (click)="click_home($event)" id="homelink" routerLink="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link homeAlist" href="#" (click)="click_list($event)" id="listlink" routerLink="/mylist">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My List</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto searchpart">
+        <form class="form-inline " action="/action_page.php">
+          <div class="dropdown-menu">
+        <ng-template #r let-r="result" >
+          <div class="dropdown-item" [routerLink]="'/watch/'+r.media_type+'/'+r.id" (click)="addCountinue(r.id,r.poster_path,r.title,r.media)">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + r.backdrop_path" class="mr-1" style="width: 40px">
+          <ngb-highlight [result]="r.title"></ngb-highlight></div>
+        </ng-template>
+          </div>
+        <input id="typeahead-template" type="text" class="form-control" placeholder="Search"
+               [(ngModel)]="this.model"
+               [ngbTypeahead]="search"
+               [resultTemplate]="r"/>
+
+        </form>
+      </ul>
+    </div>
+</nav>
+</div>
+<div class="container-fluid">
+<router-outlet></router-outlet>
+</div></div>
+<footer class="panel-footer footer"><br>Powered by TMDB, Developed by Yue Wu<br><br></footer>
+

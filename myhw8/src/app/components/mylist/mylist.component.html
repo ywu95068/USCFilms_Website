@@ -1,0 +1,44 @@
+<div class="container containOfwatchlist">
+<h2 *ngIf="results.length>0" class="myWatchlist">My Watchlist</h2>
+  <h2  *ngIf="results.length==0" class="nofound">No items found in Watchlist</h2>
+  <ng-container *ngIf="this.screenwidth>=768">
+    <ng-container *ngFor="let resul of this.temResults; let i=index">
+    <div class="row watchlistRow" >
+      <ng-container *ngFor="let r of resul">
+    <div class="col-md-2 col-sm-12 widowForPoseter" *ngIf="r.type == 'm'" [routerLink]="'/watch/movie/'+r.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500'+r.poster_path" class="postersOfwatchlist">
+      <div class="watchlistPosterTitle">
+        <div class="positionHelper">
+        <p class="txtOfposter">{{r.title}}</p></div>
+      </div>
+    </div>
+
+        <div class="col-md-2 col-sm-12 widowForPoseter" *ngIf="r.type == 't'" [routerLink]="'/watch/tv/'+r.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500'+r.poster_path" class="postersOfwatchlist">
+      <div class="watchlistPosterTitle">
+        <div class="positionHelper">
+        <p class="txtOfposter">{{r.title}}</p></div>
+      </div>
+    </div>
+      </ng-container>
+    </div>
+      </ng-container>
+  </ng-container>
+  <div *ngIf="this.screenwidth<768">
+      <div class="phoneversion" *ngFor="let r of results; let i=index">
+    <div class="widowForPoseter windowforphone" *ngIf="r.type == 'm'" [routerLink]="'/watch/movie/'+r.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500'+r.poster_path" class="postersOfwatchlist">
+      <div class="watchlistPosterTitle2">
+        <p class="txtOfposter">{{r.title}}</p>
+      </div>
+    </div>
+
+        <div class="widowForPoseter windowforphone" *ngIf="r.type == 't'" [routerLink]="'/watch/tv/'+r.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500'+r.poster_path" class="postersOfwatchlist">
+      <div class="watchlistPosterTitle2">
+        <p class="txtOfposter">{{r.title}}</p>
+      </div>
+    </div>
+      </div>
+    </div>
+</div>

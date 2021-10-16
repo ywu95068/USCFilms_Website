@@ -1,0 +1,67 @@
+ nav{
+   background-color: black;
+ }
+.form-inline{
+  color: black;
+  border-bottom: 1px solid white;
+  margin-left: 0px;
+}
+.form-control{
+  background-color: black;
+  border:0;
+}
+#uscfilms{
+  font-size: 18px;
+  color: white;
+}
+#homelink{
+  color: white;
+  margin-bottom: 0;
+}
+#listlink{
+  margin-bottom: 0;
+
+}
+ng-template{
+  padding: 0;
+}
+.dropdown-item{
+  padding: 0;
+   background-color: transparent;
+  color: white!important;
+  margin: 0;
+}
+ngb-highlight{
+  background-color:transparent;
+  color: white!important;
+  margin: 0;
+}
+.searchpart{
+  background-color: #020129!important;
+}
+.dropdown-menu{
+    background-color: #020129!important;
+  padding: 0;
+}
+.footer{
+  color: white;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 15px;
+}
+.panel-footer{
+  height: 50px;
+  margin-top: 60px;
+  background-color: black;
+}
+#outDiv{
+   min-height: calc(100vh - 110px);
+
+}
+@media screen and (max-width: 768px){
+.homeAlist{
+  float: right;
+}
+  .navbar-toggler{
+}
+}
